@@ -24,6 +24,15 @@ available_boxes:
             - 5.4
             - HHVM
     -
+        url: https://dl.dropboxusercontent.com/s/3jz559mjz2aw4gs/debian-wheezy-64-vanilla.box
+        os: debian
+        short_name: debian-wheezy-74-vanilla
+        long_name: Debian Wheezy 7.4 x64 - Virtualbox 4.3
+        php_versions:
+            - 5.5
+            - 5.4
+            - HHVM
+    -
         url: http://box.puphpet.com/debian-squeeze607-x64-vbox43.box
         os: debian
         short_name: debian-squeeze607-x64-vbox43

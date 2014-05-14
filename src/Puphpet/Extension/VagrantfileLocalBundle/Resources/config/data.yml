@@ -10,6 +10,7 @@ vm:
             modifyvm:
                 natdnshostresolver1: on
                 memory: 512
+                cpus: 2
             setextradata:
                 "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root": 1
     provision:

@@ -1,0 +1,98 @@
+{% import "PuphpetMainBundle:front:macros/popover.html.twig" as popover %}
+
+<input type="hidden" name="is_disabled[percona]" value="0" />
+
+<section id="percona">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Percona Quick Settings</h3>
+                </div>
+
+                <div class="row install-checkbox-container">
+                    <div class="col-xs-12">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="install-checkbox update-other-input"
+                                   name="percona[install]"
+                                   data-update-mariadb[install]="0"
+                                   data-hide-on-uncheck="#percona-config-container"
+                                   {% if percona.install %}checked{% endif %} value="1" /> Install Percona Server
+                        </label>
+
+                        <p class="help-block">
+                            If you install MySQL, MariaDB you cannot install Percona Server.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="{% if not percona.install %}hidden{% endif %}" id="percona-config-container">
+                    <div class="panel-body">
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="percona-root_password">
+                                    Root Password
+                                    {{ popover.small('Assign a password to the root user.
+                                        <strong>Database will only be installed
+                                        when a password is entered here.</strong>') }}
+                                </label>
+                                <input type="text" id="percona-root_password" name="percona[root_password]"
+                                       value="{{ percona.root_password }}" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label for="percona-phpmyadmin">
+                                    phpMyAdmin
+                                    {{ popover.small('If installed it will be available from
+                                        <code>http://{SERVER_IP_ADDRESS}/phpmyadmin</code>.') }}
+                                </label><br />
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="percona-phpmyadmin" name="percona[phpmyadmin]"
+                                           {% if percona.phpmyadmin %}checked{% endif %} value="1" /> Install phpMyAdmin
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="percona-adminer">
+                                    Adminer
+                                    {{ popover.small('If installed it will be available from
+                                        <code>http://{SERVER_IP_ADDRESS}/adminer</code>.') }}
+                                </label><br />
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="percona-adminer" name="percona[adminer]"
+                                           {% if percona.adminer %}checked{% endif %} value="1" /> Install Adminer
+                                </label>
+                            </div>
+                        </div>
+
+                        <p class="help-block">
+                            The preferred way to connect to your database is using a dedicated application like
+                            <a href="http://www.sequelpro.com/" target="_blank">Sequel Pro (OS X)</a>,
+                            <a href="http://www.heidisql.com/" target="_blank">HeidiSQL (Windows)</a>, and
+                            <a href="http://dev.percona.com/downloads/tools/workbench/" target="_blank">MySQL Workbench (Cross Platform)</a>.
+
+                            <br /><br />
+
+                            Connect using SSH tunnel, username <code>vagrant</code> and SSH key generated at
+                            <code>puphpet/files/dot/ssh/id_rsa.key</code>. This key is generated <strong>after</strong>
+                            your initial <code>$ vagrant up</code>!
+                        </p>
+                    </div>
+
+                    {% for database in percona.databases %}
+                        {% include 'PuphpetExtensionPerconaBundle:form/sections:NewUserAndDatabase.html.twig'
+                            with {'available_privileges': percona.available_privileges, 'database': database} %}
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                            <button type="button" class="btn btn-success btn-lg btn-block addParentContainer"
+                                    data-source-url="{{ path('puphpet.extension.percona.add_database') }}">Add another MySQL database</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

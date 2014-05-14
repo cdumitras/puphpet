@@ -1,0 +1,12 @@
+puphpet.extension.percona.homepage:
+    pattern:  /
+    defaults: { _controller: PuphpetExtensionPerconaBundle:Front:index }
+
+puphpet.extension.percona.add_database:
+    pattern:  /add-database
+    defaults: { _controller: PuphpetExtensionPerconaBundle:Front:addDatabase }
+
+puphpet.extension.percona.manifest:
+    pattern:  /manifest
+    defaults: { _controller: PuphpetExtensionPerconaBundle:Manifest:index }
+

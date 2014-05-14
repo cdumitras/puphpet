@@ -50,6 +50,10 @@ puphpet.extension.mysql:
     resource: "@PuphpetExtensionMysqlBundle/Resources/config/routing.yml"
     prefix:   /extension/mysql
 
+puphpet.extension.percona:
+    resource: "@PuphpetExtensionPerconaBundle/Resources/config/routing.yml"
+    prefix:   /extension/percona
+
 puphpet.extension.postgresql:
     resource: "@PuphpetExtensionPostgresqlBundle/Resources/config/routing.yml"
     prefix:   /extension/postgresql
